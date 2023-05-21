@@ -12,8 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "antd": "^5.5.0",
     "axios": "^1.4.0",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "express-cors": "^0.0.3",
+    "react-router-dom": "^6.11.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
