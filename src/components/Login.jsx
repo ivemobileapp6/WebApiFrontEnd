@@ -133,6 +133,8 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [userName, setUserName] = useState('');
+  const [userId, setuserId] = useState('');
+
   const navigate = useNavigate();
 
 
@@ -146,9 +148,16 @@ const Login = () => {
       
     if (response.data && response.data.token) {
     console.log('JWT Token:', response.data.token); // Print the JWT token
+    console.log('JWT Token:', response.data.token); // Print the JWT token
+
+    console.log(' userId:', response.data.userId); // Print the JWT token
+
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userType', response.data.userType); // Store user type
-      
+      localStorage.setItem('userName', response.data.name);
+      localStorage.setItem('userId', response.data.userId);
+
+      setuserId(response.data.userId)
       setUserName(response.data.name); // Update the user's name
       setSuccessMessage('Welcome!');
       setErrorMessage('');

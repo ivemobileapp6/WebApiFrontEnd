@@ -30,20 +30,22 @@
 // export default AddCat;
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './CatInfo.css';
 
+
   
-const CatCard = ({ cat }) => {
-  const { age, breed, gender, photos, description } = cat;
+const CatCard = ({ cat, onDelete, userType, onAddToFavourites   }) => {
+   const { _id, age, breed, gender, photos, description } = cat;
 
   return (
     <div className="cat-card">
-      {/*{photos && photos.length > 0 && <img src={photos[0]} alt={description} />}*/}
       {photos && photos.length > 0 && <img src={`https://webapiassignment.ivemobileapp6.repl.co/${photos}`} alt="Cat" width="150" />}
       <p>Breed: {breed}</p>
       <p>Age: {age ? age : 'N/A'}</p>
       <p>Gender: {gender}</p>
+      {userType === 'staff' && <button onClick={() => onEdit(_id)}>Edit</button>}
+      {userType === 'staff' && <button onClick={() => onDelete(_id)}>Delete</button>} 
+      {userType === 'public' && <button onClick={() => onAddToFavourites(_id)}>Add to Favourites</button> }
     </div>
   );
 };
@@ -52,6 +54,12 @@ const CatInfo = () => {
   const [cats, setCats] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState({ gender: '', age: '' });
+
+  const getUserType = () => {
+    return localStorage.getItem('userType');
+  };
+  
+  const userType = getUserType();
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -72,7 +80,42 @@ const CatInfo = () => {
       return searchMatch && genderMatch && ageMatch;
     });
   };
+  const deleteCat = async (Id) => {
+    try {
+      await fetch(`https://webapiassignment.ivemobileapp6.repl.co/cat/${Id}`, {
+        method: 'DELETE',
+      });
 
+      setCats((prevCats) => prevCats.filter((cat) => cat._id !== Id));
+    } catch (error) {
+      console.error('Error deleting cat:', error);
+    }
+  };
+
+
+const handleAddToFavourites = async (catId) => {
+  const userId = localStorage.getItem('userId');
+
+  try {
+
+    // Replace with your API endpoint for adding a cat to the user's favorites
+    const response = await fetch(`https://webapiassignment.ivemobileapp6.repl.co/favourites`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ catId, userId }),
+    });
+
+    if (response.ok) {
+      alert('Cat added to favorites!');
+    } else {
+      alert('Failed to add cat to favorites.');
+    }
+  } catch (error) {
+    console.error('Error adding cat to favorites:', error);
+  }
+};
 
   useEffect(() => {
     const fetchCats = async () => {
@@ -108,7 +151,10 @@ const CatInfo = () => {
       </div>
       <div className="cat-grid">
         {filteredCats().map((cat) => (
-          <CatCard key={cat._id} cat={cat} />
+
+          <CatCard key={cat._id} cat={cat} onDelete={deleteCat} userType={userType}     onAddToFavourites={handleAddToFavourites}
+/>
+
         ))}
       </div>
     </div>

@@ -1,23 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-const AddCat = () => {
-  const [userType, setUserType] = useState('');
+const EditCat = () => {
+  const [catId, setCatId] = useState('');
   const [age, setAge] = useState('');
   const [breed, setBreed] = useState('');
   const [gender, setGender] = useState('');
   const [description, setDescription] = useState('');
-  const [photos, setPhotos] = useState(null);
-
-  useEffect(() => {
-    const storedUserType = localStorage.getItem('userType');
-    
-    console.log('storedUserType:', storedUserType);
-    if (storedUserType) {
-      setUserType(storedUserType);
-    }
-  }, []);
-
+  const [uploadedPhotos, setUploadedPhotos] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,44 +17,48 @@ const AddCat = () => {
     formData.append('breed', breed);
     formData.append('gender', gender);
     formData.append('description', description);
-    if (photos) {
-      formData.append('photos', photos);
-    }
+    uploadedPhotos.forEach((photo) => {
+      formData.append('photos', photo);
+    });
+
+    console.log('age:', age);
+console.log('breed:', breed);
+console.log('gender:', gender);
+console.log('description:', description);
+console.log('uploadedPhotos:', uploadedPhotos);
 
     try {
       console.log(formData)
-
-      const response = await axios.post('https://webapiassignment.ivemobileapp6.repl.co/addcat', formData, {
+      const response = await axios.put(`https://webapiassignment.ivemobileapp6.repl.co/cat/${catId}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log('Server response:', response);
 
       if (response.data.success) {
-        alert('Cat added successfully');
+        alert('Cat updated successfully');
       } else {
-        alert('An error occurred while adding the cat');
+        alert('An error occurred while updating the cat');
       }
     } catch (error) {
-      alert('An error occurred while adding the cat');
+      alert('An error occurred while updating the cat');
     }
   };
 
-  if (userType !== 'staff') {
-    return (
-      <div>
-        <h1>Access Denied</h1>
-        <p>You must be a staff member to add a cat.</p>
-      </div>
-    );
-  }
-
+  const handlePhotoUpload = (e) => {
+    setUploadedPhotos([...uploadedPhotos, ...Array.from(e.target.files)]);
+  };
 
   return (
     <div>
-      
-      <h1>Add Cat</h1>
+      <h1>Edit Cat</h1>
       <form onSubmit={handleSubmit}>
+        <label>
+          Cat ID:
+          <input type="text" value={catId} onChange={(e) => setCatId(e.target.value)} />
+        </label>
+        <br />
         <label>
           Age:
           <input type="number" value={age} onChange={(e) => setAge(e.target.value)} />
@@ -90,14 +84,14 @@ const AddCat = () => {
         </label>
         <br />
         <label>
-          Image:
-          <input type="file" onChange={(e) => setPhotos(e.target.files[0])} />
+          Photos:
+          <input type="file" multiple onChange={handlePhotoUpload} />
         </label>
         <br />
-        <button type="submit">Add Cat</button>
+        <button type="submit">Update Cat</button>
       </form>
     </div>
   );
 };
 
-export default AddCat;
+export default EditCat;
