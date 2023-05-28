@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const EditCat = () => {
+  const [userType, setUserType] = useState('');
   const [catId, setCatId] = useState('');
   const [age, setAge] = useState('');
   const [breed, setBreed] = useState('');
   const [gender, setGender] = useState('');
   const [description, setDescription] = useState('');
   const [uploadedPhotos, setUploadedPhotos] = useState([]);
+
+  useEffect(() => {
+    const storedUserType = localStorage.getItem('userType');
+
+    console.log('storedUserType:', storedUserType);
+    if (storedUserType) {
+      setUserType(storedUserType);
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,10 +32,10 @@ const EditCat = () => {
     });
 
     console.log('age:', age);
-console.log('breed:', breed);
-console.log('gender:', gender);
-console.log('description:', description);
-console.log('uploadedPhotos:', uploadedPhotos);
+    console.log('breed:', breed);
+    console.log('gender:', gender);
+    console.log('description:', description);
+    console.log('uploadedPhotos:', uploadedPhotos);
 
     try {
       console.log(formData)
@@ -49,6 +59,17 @@ console.log('uploadedPhotos:', uploadedPhotos);
   const handlePhotoUpload = (e) => {
     setUploadedPhotos([...uploadedPhotos, ...Array.from(e.target.files)]);
   };
+
+
+  if (userType !== 'staff') {
+    return (
+      <div>
+        <h1>Access Denied</h1>
+        <p>You must be a staff member to add a cat.</p>
+      </div>
+    );
+  }
+
 
   return (
     <div>

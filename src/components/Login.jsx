@@ -147,29 +147,28 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post('https://webapiassignment.ivemobileapp6.repl.co/auth', { email, password });
-      
-    if (response.data && response.data.token) {
-    console.log('JWT Token:', response.data.token); // Print the JWT token
-    console.log('JWT Token:', response.data.token); // Print the JWT token
 
-    console.log(' userId:', response.data.userId); // Print the JWT token
+      if (response.data && response.data.token) {
+        console.log('JWT Token:', response.data.token); // Print the JWT token
+        console.log('JWT Token:', response.data.token); // Print the JWT token
 
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('userType', response.data.userType); // Store user type
-      localStorage.setItem('userName', response.data.name);
-      localStorage.setItem('userId', response.data.userId);
+        console.log(' userId:', response.data.userId); // Print the JWT token
 
-      setuserId(response.data.userId)
-      setUserName(response.data.name); // Update the user's name
-      setSuccessMessage('Welcome!');
-      setErrorMessage('');
-      // Redirect to the desired page after successful login
-      setTimeout(() => {
-        navigate('/addcat');
-      }, 2000);
-       } else {
-      throw new Error('Token not found in response data');
-    }
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userType', response.data.userType); // Store user type
+        localStorage.setItem('userName', response.data.name);
+        localStorage.setItem('userId', response.data.userId);
+
+        setuserId(response.data.userId)
+        setUserName(response.data.name); // Update the user's name
+        setSuccessMessage('Welcome!');
+        setErrorMessage('');
+        // Redirect to the desired page after successful login
+        window.location.reload();
+
+      } else {
+        throw new Error('Token not found in response data');
+      }
     } catch (error) {
       setSuccessMessage('');
       setErrorMessage(
@@ -203,7 +202,7 @@ const Login = () => {
         <button type="submit">Login</button>
       </form>
 
-        <div>
+      <div>
         <Google />
       </div>
 

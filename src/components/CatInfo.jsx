@@ -1,34 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import './CatInfo.css';
-
-
-// const AddCat = () => {
-//   const [cats, setCats] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchCats = async () => {
-  //     const response = await fetch('https://webapiassignment.ivemobileapp6.repl.co/getcat');
-  //     const data = await response.json();
-  //     setCats(data);
-  //   };
-
-  //   fetchCats();
-  // }, []);
-
-//   return (
-//     <div className="add-cat">
-//       <h1>Cats Gallery</h1>
-//       <div className="cat-grid">
-//         {cats.map((cat) => (
-//           <CatCard key={cat._id} cat={cat} />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AddCat;
-
 import React, { useState, useEffect } from 'react';
 import './CatInfo.css';
 
@@ -43,6 +12,7 @@ const CatCard = ({ cat, onDelete, userType, onAddToFavourites   }) => {
       <p>Breed: {breed}</p>
       <p>Age: {age ? age : 'N/A'}</p>
       <p>Gender: {gender}</p>
+      <p>Description: {description} </p>
 {userType === 'staff' && <button onClick={() => window.location.href = 'https://webapifrontend.ivemobileapp6.repl.co/editcat'}>Edit</button>}
       {userType === 'staff' && <button onClick={() => onDelete(_id)}>Delete</button>} 
       {userType === 'public' && <button onClick={() => onAddToFavourites(_id)}>Add to Favourites</button> }

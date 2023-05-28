@@ -1,20 +1,32 @@
-.chat-interface {
+.chatContainer {
   max-width: 600px;
   margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.message-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-height: 400px;
-  overflow-y: auto;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  padding: 1rem;
+.messageList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-.input-form {
-  display: flex;
-  justify-content: space-between;
+.ownMessage,
+.otherMessage {
+  max-width: 75%;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 7px;
+  word-wrap: break-word;
+  clear: both;
+}
+
+.ownMessage {
+  float: right;
+  background-color: #DCF8C6;
+}
+
+.otherMessage {
+  float: left;
+  background-color: #ECE5DD;
 }

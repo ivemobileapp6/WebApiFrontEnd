@@ -14,6 +14,7 @@ import Google from './components/Google';
 import Cat from './components/Cat';
 import Chat from './components/Chat';
 
+
 import { Layout, Space } from 'antd';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 const { Header, Content, Footer } = Layout;
@@ -23,28 +24,27 @@ export default function App() {
   const [authToken, setAuthToken] = useState(localStorage.getItem('token'));
   const [userName, setUsername] = useState(localStorage.getItem('name'));
   const [userType, setUserType] = useState(localStorage.getItem('userType'));
-  const [UserId, setUserId] = useState(localStorage.getItem('UserId'));
+const [loggedIn, setLoggedIn] = useState(false);
+
+
 
   console.log('Auth Token:', authToken);
   console.log('User name:', userName);
   console.log('Auth Token:', userType);
+  
 
   const isLoggedIn = authToken !== null;
-  const isStaff = userType === 'staff';
-
-
 
   const handleLogout = () => {
     setAuthToken(null);
     setUsername(null);
     setUserType(null);
-    localStorage.clear();
+   localStorage.clear();
 
   };
-  useEffect(() => {
-  }, [authToken, userName, userType]);
-
-
+useEffect(() => {
+}, [authToken, userName, userType]);
+  
   return (
     <Router>
       <Layout>
@@ -54,17 +54,16 @@ export default function App() {
               <nav>
                 <Space>
                   <Link to="/">Home</Link>
-                  <Link to="/catinfo">CatInfo</Link>      
-                  {isStaff && (
-                    <>
-                      <Link to="/addcat">AddCat</Link>
-                      <Link to="/editcat">EditCat</Link>
-                    </>
-                  )}
-                  <Link to="/favourites">Favourites</Link>
-                  <Link to="/cat">Cat Breeds </Link>
-                  <Link to="/chat">Chat</Link>
+                  <Link to="/catinfo">CatInfo</Link>
                   <Link to="/about">About</Link>
+                  <Link to="/addcat">AddCat</Link>
+                  <Link to="/editcat">EditCat</Link>
+                  <Link to="/favourites">Favourites</Link>
+                  <Link to="/google">Google</Link>
+                  <Link to="/cat">Cat</Link>
+                  <Link to="/chat">Chat</Link>
+
+
                 </Space>
               </nav>
             </Col>
@@ -79,6 +78,7 @@ export default function App() {
                     <>
                       <Link to="/login">Login</Link>
                       <Link to="/register">Register</Link>
+
                     </>
                   )}
                 </Space>
@@ -99,7 +99,7 @@ export default function App() {
               <Route path="/favourites" element={<FavouriteCats />} />
               <Route path="/google" element={<Google />} />
               <Route path="/cat" element={<Cat />} />
-              <Route path="/chat" element={<Chat />} />
+              <Route path="/chat" element={<Chat />} /> 
 
             </Routes>
           </Layout>
