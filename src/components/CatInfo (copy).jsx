@@ -70,27 +70,15 @@ const CatInfo = () => {
     setFilter((prevFilter) => ({ ...prevFilter, [name]: value }));
   };
 
-   const filteredCats = () => {
+  const filteredCats = () => {
     return cats.filter((cat) => {
       const searchTermLower = searchTerm.toLowerCase();
       const searchMatch = cat.breed.toLowerCase().includes(searchTermLower) || cat.description.toLowerCase().includes(searchTermLower);
       const genderMatch = !filter.gender || cat.gender === filter.gender.toLowerCase();
-      const ageMatch = !filter.age || ageFilterMatches(cat.age);
+      const ageMatch = !filter.age || cat.age === filter.age;
 
       return searchMatch && genderMatch && ageMatch;
     });
-  };
-   const ageFilterMatches = (catAge) => {
-    switch (filter.age) {
-      case '0-3':
-        return catAge >= 0 && catAge <= 3;
-      case '4-7':
-        return catAge >= 4 && catAge <= 7;
-      case '7+':
-        return catAge > 7;
-      default:
-        return true;
-    }
   };
   const deleteCat = async (Id) => {
     try {
@@ -154,12 +142,12 @@ const handleAddToFavourites = async (catId) => {
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
-     <select name="age" value={filter.age} onChange={handleFilterChange}>
-        <option value="">All Ages</option>
-        <option value="0-3">0-3</option>
-        <option value="4-7">4-7</option>
-        <option value="7+">7+</option>
-      </select>
+        <select name="age" value={filter.age} onChange={handleFilterChange}>
+          <option value="">All Ages</option>
+          <option value="1">Kitten</option>
+          <option value="Adult">Adult</option>
+          <option value="Senior">Senior</option>
+        </select>
       </div>
       <div className="cat-grid">
         {filteredCats().map((cat) => (

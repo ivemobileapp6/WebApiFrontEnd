@@ -1,32 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Favourite.css';
 
-const CatCard = ({ cat, onDelete, userType, onAddToFavourites }) => {
-  const { _id, age, breed, gender, photos, description } = cat;
 
-  return (
-    <div className="cat-card">
-      {photos && photos.length > 0 && (
-        <img
-          src={`https://webapiassignment.ivemobileapp6.repl.co/${photos[0]}`}
-          alt="Cat"
-          width="150"
-        />
-      )}
-      <p>Breed: {breed}</p>
-      <p>Age: {age ? age : 'N/A'}</p>
-      <p>Gender: {gender}</p>
-      {userType === 'staff' && <button onClick={() => onEdit(_id)}>Edit</button>}
-      {userType === 'staff' && <button onClick={() => onDelete(_id)}>Delete</button>}
-      {userType === 'public' && (
-        <button onClick={() => onAddToFavourites(_id)}>Add to Favourites</button>
-      )}
-    </div>
-  );
-};
+const CatCard = ({ cat }) => (
+  <div className="cat-card">
+    {cat.photos.length > 0 &&<img src= {`https://webapiassignment.ivemobileapp6.repl.co/${cat.photos[0]}`} alt={cat.breed} width="200" />}
 
-const FavouriteCats = ({ userId, userType, onDelete, onAddToFavourites }) => {
+    <p>{cat.breed || 'Unknown Breed'}</p>
+    <p>Age: {cat.age} | Gender: {cat.gender || 'Unknown'}</p>
+    <p>{cat.description || 'No description provided.'}</p>
+  </div>
+);
+
+const FavouriteCats = () => {
   const [favoriteCats, setFavoriteCats] = useState([]);
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     const fetchFavoriteCats = async () => {
@@ -43,15 +32,9 @@ const FavouriteCats = ({ userId, userType, onDelete, onAddToFavourites }) => {
   }, [userId]);
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+    <div className="cat-grid">
       {favoriteCats.map((cat) => (
-        <CatCard
-          key={cat._id}
-          cat={cat}
-          userType={userType}
-          onDelete={onDelete}
-          onAddToFavourites={onAddToFavourites}
-        />
+        <CatCard key={cat._id} cat={cat} />
       ))}
     </div>
   );

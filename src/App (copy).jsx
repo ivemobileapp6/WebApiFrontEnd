@@ -12,7 +12,6 @@ import EditCat from './components/EditCat';
 import FavouriteCats from './components/Favourite';
 import Google from './components/Google';
 import Cat from './components/Cat';
-import Chat from './components/Chat';
 
 
 import { Layout, Space } from 'antd';
@@ -36,8 +35,9 @@ export default function App() {
     setAuthToken(null);
     setUsername(null);
     setUserType(null);
-   localStorage.clear();
-
+    localStorage.removeItem('token');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userType');
   };
 useEffect(() => {
 }, [authToken, userName, userType]);
@@ -58,7 +58,6 @@ useEffect(() => {
                   <Link to="/favourites">Favourites</Link>
                   <Link to="/google">Google</Link>
                   <Link to="/cat">Cat</Link>
-                  <Link to="/chat">Chat</Link>
 
 
                 </Space>
@@ -96,7 +95,6 @@ useEffect(() => {
               <Route path="/favourites" element={<FavouriteCats />} />
               <Route path="/google" element={<Google />} />
               <Route path="/cat" element={<Cat />} />
-              <Route path="/chat" element={<Chat />} /> 
 
             </Routes>
           </Layout>

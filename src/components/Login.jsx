@@ -126,6 +126,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Google from './Google'
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -200,6 +202,11 @@ const Login = () => {
         />
         <button type="submit">Login</button>
       </form>
+
+        <div>
+        <Google />
+      </div>
+
       {errorMessage && <p>{errorMessage}</p>}
       {successMessage && (
         <div>
