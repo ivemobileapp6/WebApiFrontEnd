@@ -23,7 +23,6 @@ export default function App() {
   const [authToken, setAuthToken] = useState(localStorage.getItem('token'));
   const [userName, setUsername] = useState(localStorage.getItem('name'));
   const [userType, setUserType] = useState(localStorage.getItem('userType'));
-  const [UserId, setUserId] = useState(localStorage.getItem('UserId'));
 
   console.log('Auth Token:', authToken);
   console.log('User name:', userName);
@@ -32,8 +31,6 @@ export default function App() {
   const isLoggedIn = authToken !== null;
   const isStaff = userType === 'staff';
 
-
-
   const handleLogout = () => {
     setAuthToken(null);
     setUsername(null);
@@ -41,9 +38,6 @@ export default function App() {
     localStorage.clear();
 
   };
-  useEffect(() => {
-  }, [authToken, userName, userType]);
-
 
   return (
     <Router>

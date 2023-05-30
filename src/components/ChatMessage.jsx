@@ -1,7 +1,7 @@
 import React from 'react';
 import './ChatMessage.css';
 
-const ChatMessage = ({ message, currentUserType, currentUserId }) => {
+const ChatMessage = ({ message, currentUserId }) => {
   const messageClass = message.senderId === currentUserId ? 'message-right' : 'message-left';
 
   return (

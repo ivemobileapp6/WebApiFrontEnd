@@ -1,3 +1,13 @@
+/**
+ * EditCat component
+ *
+ * The component provides staff users to update the information of a specific cat. 
+ * The user type is retrieved from localStorage to determine if the useris staff to edit cat 
+ * information. 
+ * If the user is not a staff member,
+ * an "Access Denied" message is displayed.
+ */
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 

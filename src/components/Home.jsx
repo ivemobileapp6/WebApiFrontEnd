@@ -1,3 +1,9 @@
+/**
+ * Home component
+ * Used antdesign materials 
+ * Used CSS skills
+ */
+
 import React from 'react';
 import { Typography, Button, Row, Col, Card } from 'antd';
 import { HeartOutlined, InfoCircleOutlined } from '@ant-design/icons';
@@ -25,10 +31,6 @@ const Home = () => {
   ];
 
   const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    navigate("/catinfo");
-  };
 
   return (
     <div>

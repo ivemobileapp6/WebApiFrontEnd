@@ -1,3 +1,12 @@
+/**
+ * CatInfo component
+ *
+ * The component displays cats with filtering and search functions.
+ * It fetches cat data from backend API
+ * Edit, Delete buttons are only visible to staff, Add to Favourites button is only visible to user
+ * 
+ */
+
 import React, { useState, useEffect } from 'react';
 import './CatInfo.css';
 
@@ -101,7 +110,7 @@ const handleAddToFavourites = async (catId) => {
 
   useEffect(() => {
     const fetchCats = async () => {
-      const response = await fetch('https://webapiassignment.ivemobileapp6.repl.co/getcat');
+      const response = await fetch('https://webapiassignment.ivemobileapp6.repl.co/cat');
       const data = await response.json();
       setCats(data);
     };

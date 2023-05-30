@@ -1,6 +1,12 @@
+/**
+ * About Us component
+ * Used antdesign materials 
+ * Used CSS skills
+ */
 import React from 'react';
 import { Typography, Row, Col, Image } from 'antd';
 import { EnvironmentOutlined, TeamOutlined, HeartOutlined } from '@ant-design/icons';
+
 
 const { Title, Paragraph } = Typography;
 

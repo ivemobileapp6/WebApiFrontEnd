@@ -1,3 +1,11 @@
+/**
+ * Cat component
+ *
+ * This component fetches and displays cat breed information from thecatapi.com API.
+ * It uses Material UI components for layout and styling, React hooks for state management
+ * and side-effects, and axios for API calls. 
+ */
+
 import React, { useState, useEffect } from "react";
 import {
   Container,
@@ -17,7 +25,6 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  IconButton,
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 

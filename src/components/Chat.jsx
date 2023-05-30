@@ -1,3 +1,11 @@
+/**
+ * Chat component
+ *
+ * It uses the Socket.IO library for real-time communication and React hooks for state management.
+ * Users can input a room number to join and then send messages within that room. 
+ * Message style is similar to WhatsApp
+ */
+
 import io from 'socket.io-client';
 import { useEffect, useState } from 'react';
 import './Chat.css';
@@ -40,6 +48,8 @@ function Chat() {
 
 return (
   <div className="App">
+    <p>To chat with staff, please join room 1</p>
+
     <div className="chatContainer">
       <input
         placeholder="Room Number..."

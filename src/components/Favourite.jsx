@@ -1,3 +1,10 @@
+/**
+* It uses useState and useEffect hooks to manage state and fetch data from an API endpoint.
+* The CatCard component is a child component that displays the information for each individual cat.
+* The component fetches data for the current user's favorite cats based on their user ID stored in database, then stored in localstorage.
+ */
+
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Favourite.css';

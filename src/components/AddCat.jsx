@@ -1,3 +1,12 @@
+/**
+ * AddCat component
+ *
+ * This component allows staff members to add a new cat to the cat adoption website.
+ * It uses React hooks, conditional rendering, and an API call with axios to
+ * post form data and handle the response.
+ * Access to this page is restricted to staff members.
+ */
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddCat.css';
@@ -35,7 +44,7 @@ const AddCat = () => {
     try {
       console.log(formData)
 
-      const response = await axios.post('https://webapiassignment.ivemobileapp6.repl.co/addcat', formData, {
+      const response = await axios.post('https://webapiassignment.ivemobileapp6.repl.co/cat', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -64,7 +73,7 @@ const AddCat = () => {
   return (
     <div>
       
-      <h1>Add Cat</h1>
+      <h1>Add a Cat</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Age:

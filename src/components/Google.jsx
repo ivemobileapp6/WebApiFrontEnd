@@ -1,7 +1,15 @@
+/**
+ * Google component
+ *
+ * The component provides google login for users
+ * After logged in with google a/c, userinfo are stored in backend database and is authenticated in the 
+ * backend and will receive a JWT token
+ * The user's ID, user type, and token are stored in the localStorage. 
+ */
+
 import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 
 function Google() {

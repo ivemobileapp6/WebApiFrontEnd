@@ -10,8 +10,8 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-  max-width: 1000px;  /* 4 cards * 25% + 3 gaps * 1rem */
-  margin: 0 auto;     /* Center the grid on the page */
+  max-width: 1000px; 
+  margin: 0 auto;    
 }
 
 .cat-card {

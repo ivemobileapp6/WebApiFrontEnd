@@ -1,3 +1,10 @@
+/**
+ * RegisterForm component
+ *
+ * The component provides a registration form for user to register account
+ * Staff users are  required to enter a staff key during registering 
+ */
+
 import React, { useState } from "react";
 import styles from "./Register.css";
 
